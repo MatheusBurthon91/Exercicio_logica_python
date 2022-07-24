@@ -1,14 +1,28 @@
 #!/bin/python3
 
 # Complete the 'isBalanced' function below.
-#
 # The function is expected to return a STRING.
 # The function accepts STRING brackets as parameter.
 def isBalanced(brackets):
-    # Write your code here
+    if len(brackets) % 2 != 0:
+        return "NO"
+    open_brackets_str = "([{"
+    open_brackets = []
+    for character in brackets:
+        if character in open_brackets_str:
+            open_brackets.append(character)
+        elif character == ")" and open_brackets[-1] == "(":
+            open_brackets.pop()
+        elif character == "]" and open_brackets[-1] == "[":
+            open_brackets.pop()
+        elif character == "}" and open_brackets[-1] == "{":
+            open_brackets.pop()
+        else:
+            return "NO"
+    return "YES"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     t = int(input().strip())
 
@@ -18,4 +32,4 @@ if __name__ == '__main__':
 
         results.append(isBalanced(brackets))
 
-    print(*results, sep='\n')
+    print(*results, sep="\n")
